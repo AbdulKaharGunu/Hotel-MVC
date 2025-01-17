@@ -8,7 +8,7 @@ namespace Hotel.Models
         public int ReservationId { get; set; } // Primary Key
         [Required]
         public int CustomerID { get; set; } // Foreign Key
-        [Key]
+        
         public int RoomId { get; set; } // Foreign Key
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }

@@ -7,7 +7,7 @@ namespace Hotel.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
 
         // Models here
@@ -52,7 +52,19 @@ namespace Hotel.Data
                 .WithMany(r => r.Payments)
                 .HasForeignKey(p => p.ReservationId);
 
+            // Staff - StaffLogin Relationship (1-to-1)
+            modelBuilder.Entity<StaffLogin>()
+                .HasOne(sl => sl.Staff)
+                .WithOne()
+                .HasForeignKey<StaffLogin>(sl => sl.StaffId);
+
+            // Ensure the Username is unique
+            modelBuilder.Entity<StaffLogin>()
+                .HasIndex(sl => sl.UserName)
+                .IsUnique();
+
             base.OnModelCreating(modelBuilder);
 
         }
+    }
 }
